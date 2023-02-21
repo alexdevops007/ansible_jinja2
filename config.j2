@@ -1,0 +1,24 @@
+{% if not var_test %}
+var_test est 'false'
+{% endif %}
+
+{% for i in range(1,4) %}
+Nombre {{ i }}
+{% endfor %}
+
+{% for host in groups['webserver'] %}
+{{ hostvars[host].ansible_facts.default_ipv4.address }}
+{{ hostvars[host].ansible_distribution }} {{ hostvars[host].ansible_distribution_version }}
+{% endfor %}
+
+{% for item in wp_plugins %}
+{{ item.name }} - {{ item.version }}
+{% endfor %}
+
+{% if var_test %}
+{% for item in wp_plugins %}
+{{ item.name}} {{ item.version }}
+{% endfor %}
+{% else %}
+error
+{% endif %}

@@ -1,0 +1,17 @@
+---
+- name: template jinja2
+  hosts: webserver
+
+  vars:
+    var_test: false
+
+    wp_plugins:
+      - {name: akismet, version: 4.0.8}
+      - {name: broken-link-checker, version: 1.9.5}
+
+  tasks:
+    - name: Create config.out
+      connection: local
+      template:
+        src: config.j2
+        dest: config.out
